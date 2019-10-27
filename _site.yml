@@ -1,0 +1,20 @@
+name: "My Personal Website"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "About"
+      href: aboutme.html
+    - text: Visualizations
+      menu: 
+      - text: "Plotly"  
+        href: plotly.html
+      - text: "Dashboard"
+        href: dashboard.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<at3346@cumc.columbia.edu>
+    - icon: fa-github fa-lg
+      href: http://github.com/atseng1/
+output:
+  html_document:
+    theme: journal

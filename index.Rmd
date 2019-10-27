@@ -6,14 +6,18 @@ output:
     toc_float: true
     theme: journal
 ---
+<p align="center">
+<img width="300" height="400" src = "images/me.jpg">
+</p>
 
-![](images/me.jpg)
 
-I am currently a second-year Master of Public Health in Epidemiology candidate with an Applied Biostatistics certificate at Columbia University. I completed a BSc at McGill University, majoring in Physical Geography (concentration in Health Geography) and minoring in Economics.
+### Who Am I?
+I am currently a second-year Master of Public Health in Epidemiology candidate with an Applied Biostatistics certificate at Columbia University. I completed a Bachelor of Science at McGill University, mzajoring in Physical Geography (concentration in Health Geography) and minoring in Economics.
 
 I would like to gain expertise and advanced knowledge in the Global Public Health sector of the professional world, primarily focused on Health Security and Infectious Disease Epidemiology, seeking to make communities more resilient to epidemics and disasters. I possess three years of research experience and three years of employment in a typical workplace environment. 
 
 You can learn more about my professional and academic experience [here](aboutme.html).
 
-
+### Boring Fun Facts
+I like to go on long walks through Manhattan and cook new receipes every weekend.
 

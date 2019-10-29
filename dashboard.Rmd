@@ -47,7 +47,8 @@ Column {data-width=550}
 
 ```{r boxplot, echo=FALSE}
   rest_inspec %>% 
-  mutate(boro = fct_reorder(boro, score)) %>% 
+  mutate(boro = fct_reorder(boro, score),
+         text_label = str_c("Score: ", score, "\nGrade: ", grade)) %>% 
   plot_ly(y = ~score, color = ~boro, type = "box",
           colors = "Set2") %>% 
   layout(
@@ -88,7 +89,7 @@ top_cuisines =
   inner_join(top_cuisines, by = "cuisine_description") %>% 
   mutate(
     cuisine_description = fct_reorder(cuisine_description, score),
-    text_label = str_c("Cuisine Type: ", cuisine_description, '\nScore: ', score)) %>%
+    text_label = str_c("Cuisine Type: ", cuisine_description, "\nScore: ", score, "\nGrade: ", grade)) %>%
   plot_ly(
     x = ~boro, y = ~score, type = "violin", mode = "markers",
     color = ~boro, text = ~text_label, alpha = 0.5) %>% 
@@ -96,4 +97,3 @@ top_cuisines =
     xaxis = list(title = "Borough"), 
     yaxis = list(title = "Restaurant Inspection Score"))
 ```
-

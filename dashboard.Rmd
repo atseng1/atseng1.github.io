@@ -43,15 +43,14 @@ rest_inspec =
 Column {data-width=550}
 -----------------------------------------------------------------------
 
-### Boxplot
+### Distribution of Restaurant Inspection Scores Across New York City
 
-```{r boxplot}
+```{r boxplot, echo=FALSE}
   rest_inspec %>% 
   mutate(boro = fct_reorder(boro, score)) %>% 
   plot_ly(y = ~score, color = ~boro, type = "box",
           colors = "Set2") %>% 
   layout(
-    title = "Distribution of Restaurant Inspection Scores Across New York City",
     xaxis = list(title = "Borough"), 
     yaxis = list(title = "Restaurant Inspection Score"))
 ```
@@ -60,21 +59,20 @@ Column {data-width=550}
 Column {data-width=450}
 -----------------------------------------------------------------------
 
-### Bar Chart
+### Number of Restaurant Inspections Across New York City
 
-```{r barchart}
+```{r barchart, echo=FALSE}
   rest_inspec %>% 
   count(boro) %>% 
   mutate(boro = fct_reorder(boro, n)) %>% 
   plot_ly(x = ~boro, y = ~n, color = ~boro, type = "bar") %>% 
   layout(
-    title = "Number of Restaurant Inspections Across New York City",
     xaxis = list(title = "Borough"), 
     yaxis = list(title = "Number of Restaurant Inspections"))
 ```
 
 
-### Violin Plot
+### Restaurant Inspection Scores of the Top 8 Cuisines In New York City
 
 ```{r top8cuisines, include=FALSE}
 top_cuisines =
@@ -85,7 +83,7 @@ top_cuisines =
 ```
 
 
-```{r violinplot}
+```{r violinplot, echo=FALSE}
   rest_inspec %>% 
   inner_join(top_cuisines, by = "cuisine_description") %>% 
   mutate(
@@ -95,7 +93,6 @@ top_cuisines =
     x = ~boro, y = ~score, type = "violin", mode = "markers",
     color = ~boro, text = ~text_label, alpha = 0.5) %>% 
   layout(
-    title = "Restaurant Inspection Scores of the Top 8 Cuisines In New York City",
     xaxis = list(title = "Borough"), 
     yaxis = list(title = "Restaurant Inspection Score"))
 ```

@@ -5,16 +5,14 @@ navbar:
   right:
     - text: "About"
       href: aboutme.html
-    - text: Visualizations
-      menu: 
-      - text: "Plotly"  
-        href: plotly.html
-      - text: "Dashboard"
-        href: dashboard.html
+    - text: "Dashboard"
+      href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<at3346@cumc.columbia.edu>
     - icon: fa-github fa-lg
       href: http://github.com/atseng1/
+    - icon: fa-linkedin fa-lg
+      href: http://www.linkedin.com/in/ashleytseng1
 output:
   html_document:
     theme: journal

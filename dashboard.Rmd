@@ -13,9 +13,90 @@ library(viridis)
 library(p8105.datasets)
 library(plotly)
 
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
 
-```{r}
+```{r loaddata, include=FALSE}
+set.seed(8)
 
+data("rest_inspec") 
+
+rest_inspec = 
+  rest_inspec %>% 
+  filter(!is.na(score)) %>%
+  sample_n(5000)
+```
+
+Column {data-width=550}
+-----------------------------------------------------------------------
+
+### Boxplot
+
+```{r boxplot}
+  rest_inspec %>% 
+  mutate(boro = fct_reorder(boro, score)) %>% 
+  plot_ly(y = ~score, color = ~boro, type = "box",
+          colors = "Set2") %>% 
+  layout(
+    title = "Distribution of Restaurant Inspection Scores Across New York City",
+    xaxis = list(title = "Borough"), 
+    yaxis = list(title = "Restaurant Inspection Score"))
+```
+
+
+Column {data-width=450}
+-----------------------------------------------------------------------
+
+### Bar Chart
+
+```{r barchart}
+  rest_inspec %>% 
+  count(boro) %>% 
+  mutate(boro = fct_reorder(boro, n)) %>% 
+  plot_ly(x = ~boro, y = ~n, color = ~boro, type = "bar") %>% 
+  layout(
+    title = "Number of Restaurant Inspections Across New York City",
+    xaxis = list(title = "Borough"), 
+    yaxis = list(title = "Number of Restaurant Inspections"))
+```
+
+
+### Violin Plot
+
+```{r top8cuisines, include=FALSE}
+top_cuisines =
+  rest_inspec %>% 
+  count(cuisine_description, sort = TRUE) %>% 
+  top_n(8) %>% 
+  select(cuisine_description)
+```
+
+
+```{r violinplot}
+  rest_inspec %>% 
+  inner_join(top_cuisines, by = "cuisine_description") %>% 
+  mutate(
+    cuisine_description = fct_reorder(cuisine_description, score),
+    text_label = str_c("Cuisine Type: ", cuisine_description, '\nScore: ', score)) %>%
+  plot_ly(
+    x = ~boro, y = ~score, type = "violin", mode = "markers",
+    color = ~boro, text = ~text_label, alpha = 0.5) %>% 
+  layout(
+    title = "Restaurant Inspection Scores of the Top 8 Cuisines In New York City",
+    xaxis = list(title = "Borough"), 
+    yaxis = list(title = "Restaurant Inspection Score"))
 ```
 

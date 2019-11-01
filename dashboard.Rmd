@@ -36,8 +36,11 @@ data("rest_inspec")
 
 rest_inspec = 
   rest_inspec %>% 
-  filter(!is.na(score)) %>%
-  sample_n(5000)
+  filter(
+    !is.na(score),
+    !is.na(grade),
+    boro != "Missing") %>%
+  sample_n(1000)
 ```
 
 Column {data-width=550}
@@ -46,9 +49,8 @@ Column {data-width=550}
 ### Distribution of Restaurant Inspection Scores Across New York City
 
 ```{r boxplot, echo=FALSE}
-  rest_inspec %>% 
-  mutate(boro = fct_reorder(boro, score),
-         text_label = str_c("Score: ", score, "\nGrade: ", grade)) %>% 
+rest_inspec %>% 
+  mutate(boro = fct_reorder(boro, score)) %>% 
   plot_ly(y = ~score, color = ~boro, type = "box",
           colors = "Set2") %>% 
   layout(
@@ -63,7 +65,7 @@ Column {data-width=450}
 ### Number of Restaurant Inspections Across New York City
 
 ```{r barchart, echo=FALSE}
-  rest_inspec %>% 
+rest_inspec %>% 
   count(boro) %>% 
   mutate(boro = fct_reorder(boro, n)) %>% 
   plot_ly(x = ~boro, y = ~n, color = ~boro, type = "bar") %>% 
@@ -85,11 +87,12 @@ top_cuisines =
 
 
 ```{r violinplot, echo=FALSE}
-  rest_inspec %>% 
+rest_inspec %>% 
   inner_join(top_cuisines, by = "cuisine_description") %>% 
   mutate(
-    cuisine_description = fct_reorder(cuisine_description, score),
-    text_label = str_c("Cuisine Type: ", cuisine_description, "\nScore: ", score, "\nGrade: ", grade)) %>%
+    text_label = str_c("Cuisine Type: ", cuisine_description, "\nScore: ", score, "\nGrade: ", grade),
+    cuisine_description = fct_reorder(cuisine_description, score)
+    ) %>%
   plot_ly(
     x = ~boro, y = ~score, type = "violin", mode = "markers",
     color = ~boro, text = ~text_label, alpha = 0.5) %>% 

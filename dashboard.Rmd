@@ -43,7 +43,7 @@ rest_inspec =
   sample_n(1000)
 ```
 
-Column {data-width=550}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Number of Restaurant Inspections Across New York City
@@ -60,7 +60,7 @@ rest_inspec %>%
 
 
 
-Column {data-width=450}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Distribution of Restaurant Inspection Scores Across New York City
@@ -71,8 +71,8 @@ rest_inspec %>%
   plot_ly(y = ~score, color = ~boro, type = "box",
           colors = "Set2") %>% 
   layout(
-    xaxis = list(title = "Borough"), 
-    yaxis = list(title = "Restaurant Inspection Score"))
+    xaxis = list(title = "Borough", size = 12), 
+    yaxis = list(title = "Restaurant Inspection Score", size = 12))
 ```
 
 
@@ -98,6 +98,6 @@ rest_inspec %>%
     x = ~boro, y = ~score, type = "violin", mode = "markers",
     color = ~boro, text = ~text_label, alpha = 0.5) %>% 
   layout(
-    xaxis = list(title = "Borough"), 
-    yaxis = list(title = "Restaurant Inspection Score"))
+    xaxis = list(title = "Borough", size = 12), 
+    yaxis = list(title = "Restaurant Inspection Score", size = 12))
 ```
